@@ -11,6 +11,9 @@
 #include "MoneyKingDlg.h"
 #include "AADlg.h"
 #include "ShoppingDlg.h"
+#include "Bonus2Dlg.h"
+#include "Bonus3Dlg.h"
+#include "Bonus4Dlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -134,6 +137,27 @@ BOOL CBaseDlg::OnInitDialog()
 	m_Shopping->MoveWindow(m_ShowRect);
 	m_Shopping->ShowWindow(SW_HIDE);
 
+	m_Bonus2 = new CBonus2Dlg;
+	m_Bonus2->Create(IDD_BONUS2_DIALOG, this);
+	GetWindowRect(&m_ShowRect);
+	m_ShowRect = CRect(0, 0, m_ShowRect.Width(), m_ShowRect.Height());
+	m_Bonus2->MoveWindow(m_ShowRect);
+	m_Bonus2->ShowWindow(SW_HIDE);
+
+	m_Bonus3 = new CBonus3Dlg;
+	m_Bonus3->Create(IDD_BONUS3_DIALOG, this);
+	GetWindowRect(&m_ShowRect);
+	m_ShowRect = CRect(0, 0, m_ShowRect.Width(), m_ShowRect.Height());
+	m_Bonus3->MoveWindow(m_ShowRect);
+	m_Bonus3->ShowWindow(SW_HIDE);
+
+	m_Bonus4 = new CBonus4Dlg;
+	m_Bonus4->Create(IDD_BONUS4_DIALOG, this);
+	GetWindowRect(&m_ShowRect);
+	m_ShowRect = CRect(0, 0, m_ShowRect.Width(), m_ShowRect.Height());
+	m_Bonus4->MoveWindow(m_ShowRect);
+	m_Bonus4->ShowWindow(SW_HIDE);
+
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -196,6 +220,9 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus->ShowWindow(SW_HIDE);
 		m_AA->ShowWindow(SW_HIDE);
 		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_BONUS:
@@ -204,6 +231,9 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus->ShowWindow(SW_SHOW);
 		m_AA->ShowWindow(SW_HIDE);
 		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_AA:
@@ -212,6 +242,9 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus->ShowWindow(SW_HIDE);
 		m_AA->ShowWindow(SW_SHOW);
 		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_SHOPPING:
@@ -220,8 +253,45 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus->ShowWindow(SW_HIDE);
 		m_AA->ShowWindow(SW_HIDE);
 		m_Shopping->ShowWindow(SW_SHOW);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_HIDE);
+	}
+	break;
+	case DLG_BONUS2:
+	{
+		m_MoneyKing->ShowWindow(SW_HIDE);
+		m_Bonus->ShowWindow(SW_HIDE);
+		m_AA->ShowWindow(SW_HIDE);
+		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_SHOW);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_HIDE);
+	}
+	break;
+	case DLG_BONUS3:
+	{
+		m_MoneyKing->ShowWindow(SW_HIDE);
+		m_Bonus->ShowWindow(SW_HIDE);
+		m_AA->ShowWindow(SW_HIDE);
+		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_SHOW);
+		m_Bonus4->ShowWindow(SW_HIDE);
+	}
+	break;
+	case DLG_BONUS4:
+	{
+		m_MoneyKing->ShowWindow(SW_HIDE);
+		m_Bonus->ShowWindow(SW_HIDE);
+		m_AA->ShowWindow(SW_HIDE);
+		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_SHOW);
 	}
 	break;
 	}
+	
 }
 

@@ -187,6 +187,9 @@
     <ClInclude Include="AADlg.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="BaseDlg.h" />
+    <ClInclude Include="Bonus2Dlg.h" />
+    <ClInclude Include="Bonus3Dlg.h" />
+    <ClInclude Include="Bonus4Dlg.h" />
     <ClInclude Include="BonusDlg.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MoneyKingDlg.h" />
@@ -199,6 +202,9 @@
     <ClCompile Include="AADlg.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="BaseDlg.cpp" />
+    <ClCompile Include="Bonus2Dlg.cpp" />
+    <ClCompile Include="Bonus3Dlg.cpp" />
+    <ClCompile Include="Bonus4Dlg.cpp" />
     <ClCompile Include="BonusDlg.cpp" />
     <ClCompile Include="MoneyKingDlg.cpp" />
     <ClCompile Include="pch.cpp">

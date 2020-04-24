@@ -24,6 +24,8 @@ CBonusDlg::CBonusDlg(CWnd* pParent /*=nullptr*/)
 	, num_3(0)
 	, num_4(0)
 	, n_str(_T(""))
+	, m_b2things(0)
+	, m_bGeneral(0)
 {
 
 }
@@ -40,6 +42,8 @@ void CBonusDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT2, num_3);
 	DDX_Text(pDX, IDC_EDIT4, num_4);
 	DDX_Text(pDX, IDC_EDIT5, n_str);
+	DDX_Radio(pDX, IDC_B2THINGS, m_b2things);
+	DDX_Radio(pDX, IDC_BGENERAL, m_bGeneral);
 }
 
 
@@ -50,6 +54,10 @@ BEGIN_MESSAGE_MAP(CBonusDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &CBonusDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BMENU_4, &CBonusDlg::OnBnClickedBmenu4)
 	ON_BN_CLICKED(IDC_BMENU_3, &CBonusDlg::OnBnClickedBmenu3)
+	ON_BN_CLICKED(IDC_B2THINGS, &CBonusDlg::OnBnClickedB2things)
+	ON_BN_CLICKED(IDC_B3THINGS, &CBonusDlg::OnBnClickedB3things)
+	ON_BN_CLICKED(IDC_BGENERAL, &CBonusDlg::OnBnClickedBgeneral)
+	ON_BN_CLICKED(IDC_BCUN, &CBonusDlg::OnBnClickedBcun)
 END_MESSAGE_MAP()
 
 // CBonusDlg 消息处理程序
@@ -67,7 +75,7 @@ void CBonusDlg::OnBnClickedBmenu2()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
-	pMMD->ShowPage(2);			//跳到单价比较对话框
+	pMMD->ShowPage(1);			//跳到单价比较对话框
 }
 
 
@@ -127,4 +135,69 @@ void CBonusDlg::Calculator()
 		n_str = "B的性价比更高!";
 	}
 	UpdateData(FALSE);
+}
+
+void CBonusDlg::OnBnClickedB2things()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_b2things = 0;
+	UpdateData(FALSE);
+	SwitchPage();		//转换至对应界面
+}
+
+
+void CBonusDlg::OnBnClickedB3things()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_b2things = 1;
+	UpdateData(FALSE);
+	SwitchPage();		//转换至对应界面
+}
+
+
+void CBonusDlg::OnBnClickedBgeneral()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_bGeneral = 0;
+	UpdateData(FALSE);
+	SwitchPage();		//转换至对应界面
+}
+
+
+void CBonusDlg::OnBnClickedBcun()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_bGeneral = 1;
+	UpdateData(FALSE);
+	SwitchPage();		//转换至对应界面
+}
+
+void CBonusDlg::SwitchPage()		//转换界面
+{
+	if (m_b2things == 0 && m_bGeneral == 0)
+	{
+		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
+		pMMD->ShowPage(1);
+	}
+	else if (m_b2things == 1 && m_bGeneral == 0)
+	{
+		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
+		pMMD->ShowPage(4);
+	}
+	else if (m_b2things == 0 && m_bGeneral == 1)
+	{
+		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
+		pMMD->ShowPage(5);
+	}
+	else if (m_b2things == 1 && m_bGeneral == 1)
+	{
+		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
+		pMMD->ShowPage(6);
+	}
+	else                              //错误情况
+		MessageBox("出现问题啦，请重新选择！");
 }
