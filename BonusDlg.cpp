@@ -51,13 +51,13 @@ BEGIN_MESSAGE_MAP(CBonusDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BMENU_1, &CBonusDlg::OnBnClickedBmenu1)
 	ON_BN_CLICKED(IDC_BMENU_2, &CBonusDlg::OnBnClickedBmenu2)
 	ON_BN_CLICKED(IDC_BUTTON1, &CBonusDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_BUTTON1, &CBonusDlg::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BMENU_4, &CBonusDlg::OnBnClickedBmenu4)
 	ON_BN_CLICKED(IDC_BMENU_3, &CBonusDlg::OnBnClickedBmenu3)
 	ON_BN_CLICKED(IDC_B2THINGS, &CBonusDlg::OnBnClickedB2things)
 	ON_BN_CLICKED(IDC_B3THINGS, &CBonusDlg::OnBnClickedB3things)
 	ON_BN_CLICKED(IDC_BGENERAL, &CBonusDlg::OnBnClickedBgeneral)
 	ON_BN_CLICKED(IDC_BCUN, &CBonusDlg::OnBnClickedBcun)
+	ON_BN_CLICKED(IDC_BUTTON2, &CBonusDlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 // CBonusDlg 消息处理程序
@@ -109,30 +109,26 @@ void CBonusDlg::OnBnClickedButton1()
 	UpdateData(FALSE);
 }
 
-void CBonusDlg::OnBnClickedButton2() //清零键
-{
-	UpdateData(TRUE);
-	n_str = "";       //将结论显示框清空
-	to_string(num_1) = "";
-	to_string(num_2) = "";
-	to_string(num_3) = "";
-	to_string(num_4) = "";
-	UpdateData(FALSE);
-}
-
 void CBonusDlg::Calculator()
 {
 	UpdateData(TRUE);
-	double num_a = num_2 / num_1; //规格A的平均价格
-	double num_b = num_4 / num_3; //规格B的平均价格
+	double num_a = num_1 / num_2; //规格A的平均价格
+	double num_b = num_3 / num_4; //规格B的平均价格
 
-	if (num_a <= num_b)
+	if (num_a < num_b)
 	{
 		n_str = "A的性价比更高!";
 	}
 	else
 	{
-		n_str = "B的性价比更高!";
+		if (num_a == num_b)
+		{
+			n_str = "A和B的性价比相同!";
+		}
+		else 
+		{
+			n_str = "B的性价比更高!";
+		}
 	}
 	UpdateData(FALSE);
 }
@@ -200,4 +196,17 @@ void CBonusDlg::SwitchPage()		//转换界面
 	}
 	else                              //错误情况
 		MessageBox("出现问题啦，请重新选择！");
+}
+
+
+void CBonusDlg::OnBnClickedButton2()  //清零键
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	n_str = "";       //将结论显示框清空
+	num_1 = 0;
+	num_2 = 0;
+	num_3 = 0;
+	num_4 = 0;
+	UpdateData(FALSE);
 }

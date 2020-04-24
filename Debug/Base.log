@@ -1,2 +1,12 @@
-﻿D:\Microsoft Visual Studio\Visual Studio\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(Base.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
-  Base.vcxproj -> E:\VS-workspace\Money-king\King\Debug\MoneyKing.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(467,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(Base.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  AADlg.cpp
+  Base.cpp
+  BaseDlg.cpp
+  Bonus2Dlg.cpp
+  Bonus3Dlg.cpp
+  Bonus4Dlg.cpp
+  BonusDlg.cpp
+  MoneyKingDlg.cpp
+  ShoppingDlg.cpp
+  正在生成代码...
+  Base.vcxproj -> C:\Users\婷婷小仙女\Desktop\King\Debug\MoneyKing.exe

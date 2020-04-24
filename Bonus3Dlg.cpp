@@ -16,6 +16,11 @@ CBonus3Dlg::CBonus3Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_BONUS3_DIALOG, pParent)
 	, m_b32things(0)
 	, m_b3General(1)
+	, n_1(0)
+	, n_2(0)
+	, n_3(0)
+	, n_4(0)
+	, n_res(_T(""))
 {
 
 }
@@ -29,6 +34,11 @@ void CBonus3Dlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Radio(pDX, IDC_B32THINGS, m_b32things);
 	DDX_Radio(pDX, IDC_B3GENERAL, m_b3General);
+	DDX_Text(pDX, IDC_EDIT1, n_1);
+	DDX_Text(pDX, IDC_EDIT3, n_2);
+	DDX_Text(pDX, IDC_EDIT2, n_3);
+	DDX_Text(pDX, IDC_EDIT4, n_4);
+	DDX_Text(pDX, IDC_EDIT5, n_res);
 }
 
 
@@ -41,6 +51,8 @@ BEGIN_MESSAGE_MAP(CBonus3Dlg, CDialogEx)
 	ON_BN_CLICKED(IDC_B33THINGS, &CBonus3Dlg::OnBnClickedB33things)
 	ON_BN_CLICKED(IDC_B3GENERAL, &CBonus3Dlg::OnBnClickedB3general)
 	ON_BN_CLICKED(IDC_B3CUN, &CBonus3Dlg::OnBnClickedB3cun)
+	ON_BN_CLICKED(IDC_BUTTON1, &CBonus3Dlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON2, &CBonus3Dlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -141,4 +153,56 @@ void CBonus3Dlg::SwitchPage()		//转换界面
 	}
 	else                              //错误情况
 		MessageBox("出现问题啦，请重新选择！");
+}
+void CBonus3Dlg::Calculator()
+{
+	UpdateData(TRUE);
+	double t = 1.27 * 1.27 * 3.14;
+	double num_a = n_1 / (n_2 * n_2 * t); //规格A的平均价格
+	double num_b = n_3 / (n_4 * n_4 * t); //规格B的平均价格
+
+	if (num_a < num_b)
+	{
+		n_res = "A的性价比更高!";
+	}
+	else
+	{
+		if (num_a == num_b)
+		{
+			n_res = "A和B的性价比相同!";
+		}
+		else
+		{
+			n_res = "B的性价比更高!";
+		}
+	}
+	UpdateData(FALSE);
+}
+
+void CBonus3Dlg::OnBnClickedButton1() //计算键
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	if ((n_1 != 0) & (n_2 != 0) & (n_3 != 0) & (n_4 != 0)) //避免输错
+	{
+		Calculator();
+	}
+	else
+	{
+		MessageBox("输错了哦，再来一次吧！");
+	}
+	UpdateData(FALSE);
+}
+
+
+void CBonus3Dlg::OnBnClickedButton2()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	n_res = "";       //将结论显示框清空
+	n_1 = 0;
+	n_2 = 0;
+	n_3 = 0;
+	n_4 = 0;
+	UpdateData(FALSE);
 }

@@ -14,3 +14,5 @@ C:\Users\婷婷小仙女\Desktop\MONEY-KING (1)\Debug\MoneyKing.exe
 C:\Users\婷婷小仙女\Desktop\MONEY-KING (1)\Debug\MoneyKing.pdb
 E:\VS-workspace\Money-king\King\Debug\MoneyKing.exe
 E:\VS-workspace\Money-king\King\Debug\MoneyKing.pdb
+C:\Users\婷婷小仙女\Desktop\King\Debug\MoneyKing.exe
+C:\Users\婷婷小仙女\Desktop\King\Debug\MoneyKing.pdb

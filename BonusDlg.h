@@ -27,7 +27,6 @@ public:
 	afx_msg void OnBnClickedBmenu1();
 	afx_msg void OnBnClickedBmenu2();
 	afx_msg void OnBnClickedButton1();
-	afx_msg void OnBnClickedButton2();
 	double num_1;
 	double num_2;
 	double num_3;
@@ -41,4 +40,5 @@ public:
 	afx_msg void OnBnClickedB3things();
 	afx_msg void OnBnClickedBgeneral();
 	afx_msg void OnBnClickedBcun();
+	afx_msg void OnBnClickedButton2();
 };

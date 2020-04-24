@@ -24,7 +24,9 @@
 #define IDC_NUM_2                       1007
 #define IDC_EDIT5                       1007
 #define IDC_NUM_3                       1008
+#define IDC_EDIT13                      1008
 #define IDC_ADD                         1009
+#define IDC_EDIT14                      1009
 #define IDC_AMENU_3                     1010
 #define IDC_EDIT6                       1012
 #define IDC_MMENU_3                     1013

@@ -12,6 +12,7 @@ public:
 	virtual ~CBonus4Dlg();
 
 	void SwitchPage();
+	void Calculator();
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
@@ -33,4 +34,13 @@ public:
 	afx_msg void OnBnClickedB43things();
 	afx_msg void OnBnClickedB4general();
 	afx_msg void OnBnClickedB4cun();
+	double n_1;
+	double n_2;
+	double n_3;
+	double n_4;
+	double n_5;
+	double n_6;
+	CString n_res;
+	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButton2();
 };
