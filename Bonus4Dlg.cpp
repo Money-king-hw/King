@@ -136,22 +136,27 @@ void CBonus4Dlg::OnBnClickedB4cun()
 
 void CBonus4Dlg::SwitchPage()		//转换界面
 {
-	if (m_b42things == 0 && m_b4General == 0)
+	UpdateData(TRUE);
+	int temp1 = m_b42things, temp2 = m_b4General;
+	m_b42things = 1;
+	m_b4General = 1;
+	UpdateData(FALSE);
+	if (temp1 == 0 && temp2 == 0)
 	{
 		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
 		pMMD->ShowPage(1);
 	}
-	else if (m_b42things == 1 && m_b4General == 0)
+	else if (temp1 == 1 && temp2 == 0)
 	{
 		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
 		pMMD->ShowPage(4);
 	}
-	else if (m_b42things == 0 && m_b4General == 1)
+	else if (temp1 == 0 && temp2 == 1)
 	{
 		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
 		pMMD->ShowPage(5);
 	}
-	else if (m_b42things == 1 && m_b4General == 1)
+	else if (temp1 == 1 && temp2 == 1)
 	{
 		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
 		pMMD->ShowPage(6);

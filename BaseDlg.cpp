@@ -14,6 +14,8 @@
 #include "Bonus2Dlg.h"
 #include "Bonus3Dlg.h"
 #include "Bonus4Dlg.h"
+#include "AA2Dlg.h"
+#include "AA3Dlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -158,6 +160,20 @@ BOOL CBaseDlg::OnInitDialog()
 	m_Bonus4->MoveWindow(m_ShowRect);
 	m_Bonus4->ShowWindow(SW_HIDE);
 
+	m_AA2 = new CAA2Dlg;
+	m_AA2->Create(IDD_AA2_DIALOG, this);
+	GetWindowRect(&m_ShowRect);
+	m_ShowRect = CRect(0, 0, m_ShowRect.Width(), m_ShowRect.Height());
+	m_AA2->MoveWindow(m_ShowRect);
+	m_AA2->ShowWindow(SW_HIDE);
+
+	m_AA3 = new CAA3Dlg;
+	m_AA3->Create(IDD_AA3_DIALOG, this);
+	GetWindowRect(&m_ShowRect);
+	m_ShowRect = CRect(0, 0, m_ShowRect.Width(), m_ShowRect.Height());
+	m_AA3->MoveWindow(m_ShowRect);
+	m_AA3->ShowWindow(SW_HIDE);
+
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
@@ -223,6 +239,8 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus2->ShowWindow(SW_HIDE);
 		m_Bonus3->ShowWindow(SW_HIDE);
 		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_BONUS:
@@ -234,6 +252,8 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus2->ShowWindow(SW_HIDE);
 		m_Bonus3->ShowWindow(SW_HIDE);
 		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_AA:
@@ -245,6 +265,8 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus2->ShowWindow(SW_HIDE);
 		m_Bonus3->ShowWindow(SW_HIDE);
 		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_SHOPPING:
@@ -256,6 +278,8 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus2->ShowWindow(SW_HIDE);
 		m_Bonus3->ShowWindow(SW_HIDE);
 		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_BONUS2:
@@ -267,6 +291,8 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus2->ShowWindow(SW_SHOW);
 		m_Bonus3->ShowWindow(SW_HIDE);
 		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_BONUS3:
@@ -278,6 +304,8 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus2->ShowWindow(SW_HIDE);
 		m_Bonus3->ShowWindow(SW_SHOW);
 		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_HIDE);
 	}
 	break;
 	case DLG_BONUS4:
@@ -289,9 +317,36 @@ void CBaseDlg::ShowPage(int CurrentPage)
 		m_Bonus2->ShowWindow(SW_HIDE);
 		m_Bonus3->ShowWindow(SW_HIDE);
 		m_Bonus4->ShowWindow(SW_SHOW);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_HIDE);
+	}
+	break;
+	case DLG_AA2:
+	{
+		m_MoneyKing->ShowWindow(SW_HIDE);
+		m_Bonus->ShowWindow(SW_HIDE);
+		m_AA->ShowWindow(SW_HIDE);
+		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_SHOW);
+		m_AA3->ShowWindow(SW_HIDE);
+	}
+	break;
+	case DLG_AA3:
+	{
+		m_MoneyKing->ShowWindow(SW_HIDE);
+		m_Bonus->ShowWindow(SW_HIDE);
+		m_AA->ShowWindow(SW_HIDE);
+		m_Shopping->ShowWindow(SW_HIDE);
+		m_Bonus2->ShowWindow(SW_HIDE);
+		m_Bonus3->ShowWindow(SW_HIDE);
+		m_Bonus4->ShowWindow(SW_HIDE);
+		m_AA2->ShowWindow(SW_HIDE);
+		m_AA3->ShowWindow(SW_SHOW);
 	}
 	break;
 	}
-	
 }
 

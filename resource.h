@@ -14,6 +14,8 @@
 #define IDD_BONUS2_DIALOG               138
 #define IDD_BONUS3_DIALOG               140
 #define IDD_BONUS4_DIALOG               142
+#define IDD_AA2_DIALOG                  144
+#define IDD_AA3_DIALOG                  146
 #define IDC_EDIT1                       1003
 #define IDC_AMENU_1                     1004
 #define IDC_EDIT3                       1004
@@ -96,14 +98,49 @@
 #define IDC_B43THINGS                   1073
 #define IDC_B4GENERAL                   1074
 #define IDC_B4CUN                       1075
+#define IDC_APRICE1                     1076
+#define IDC_APRICE2                     1077
+#define IDC_APRCIE_ALL                  1078
+#define IDC_AEDIT                       1079
+#define IDC_ACALCULATE_BUTTON           1080
+#define IDC_ACLEAR_BUTTON               1081
+#define IDC_A22PEOPLE                   1082
+#define IDC_A23PEOPLE                   1083
+#define IDC_A24PEOPLE                   1084
+#define IDC_A2PRICE1                    1085
+#define IDC_A2PRICE2                    1086
+#define IDC_A2PRCIE_ALL                 1087
+#define IDC_A2EDIT                      1088
+#define IDC_A2CALCULATE_BUTTON          1089
+#define IDC_A2CLEAR_BUTTON              1090
+#define IDC_A2MENU_1                    1091
+#define IDC_A2PRICE3                    1092
+#define IDC_A2MENU_2                    1093
+#define IDC_A3PRICE4                    1093
+#define IDC_A2MENU_3                    1094
+#define IDC_A2MENU_4                    1095
+#define IDC_A3MENU_1                    1096
+#define IDC_A3MENU_2                    1097
+#define IDC_A3MENU_3                    1098
+#define IDC_A3MENU_4                    1099
+#define IDC_A32PEOPLE                   1100
+#define IDC_A33PEOPLE                   1101
+#define IDC_A34PEOPLE                   1102
+#define IDC_A3PRICE1                    1103
+#define IDC_A3PRICE2                    1104
+#define IDC_A3PRICE3                    1105
+#define IDC_A3PRCIE_ALL                 1106
+#define IDC_A3EDIT                      1107
+#define IDC_A3CALCULATE_BUTTON          1108
+#define IDC_A3CLEAR_BUTTON              1109
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        144
+#define _APS_NEXT_RESOURCE_VALUE        148
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1076
+#define _APS_NEXT_CONTROL_VALUE         1111
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

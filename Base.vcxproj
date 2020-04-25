@@ -184,6 +184,8 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AA2Dlg.h" />
+    <ClInclude Include="AA3Dlg.h" />
     <ClInclude Include="AADlg.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="BaseDlg.h" />
@@ -199,6 +201,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AA2Dlg.cpp" />
+    <ClCompile Include="AA3Dlg.cpp" />
     <ClCompile Include="AADlg.cpp" />
     <ClCompile Include="Base.cpp" />
     <ClCompile Include="BaseDlg.cpp" />

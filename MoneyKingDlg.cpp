@@ -95,7 +95,7 @@ void CMoneyKingDlg::OnBnClickedPercent()		//百分比按钮
 	}
 	else
 	{
-		m_str.Format("%f", temp);  //double型的数据转为Cstring型
+		m_str.Format("%g", temp);  //double型的数据转为Cstring型,并去除多余的零
 	}
 	UpdateData(FALSE);
 }
@@ -305,7 +305,7 @@ void CMoneyKingDlg::Calculator()	//计算，涉及到两个操作数，按下“
 	}
 	else
 	{
-		m_str.Format("%f", f);  //double型的数据转为Cstring型
+		m_str.Format("%g", f);  //double型的数据转为Cstring型，并去除多余的零
 	}
 	UpdateData(FALSE);
 }

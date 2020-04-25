@@ -14,6 +14,11 @@ IMPLEMENT_DYNAMIC(CAADlg, CDialogEx)
 
 CAADlg::CAADlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_AA_DIALOG, pParent)
+	, m_a2people(0)
+	, m_aPrice1(0)
+	, m_aPrice2(0)
+	, m_aPriceAll(0)
+	, m_astr(_T(""))
 {
 
 }
@@ -25,6 +30,11 @@ CAADlg::~CAADlg()
 void CAADlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Radio(pDX, IDC_A2PEOPLE, m_a2people);
+	DDX_Text(pDX, IDC_APRICE1, m_aPrice1);
+	DDX_Text(pDX, IDC_APRICE2, m_aPrice2);
+	DDX_Text(pDX, IDC_APRCIE_ALL, m_aPriceAll);
+	DDX_Text(pDX, IDC_AEDIT, m_astr);
 }
 
 
@@ -33,6 +43,11 @@ BEGIN_MESSAGE_MAP(CAADlg, CDialogEx)
 	ON_BN_CLICKED(IDC_AMENU_2, &CAADlg::OnBnClickedAmenu2)
 	ON_BN_CLICKED(IDC_AMENU_3, &CAADlg::OnBnClickedAmenu3)
 	ON_BN_CLICKED(IDC_AMENU_4, &CAADlg::OnBnClickedAmenu4)
+	ON_BN_CLICKED(IDC_ACALCULATE_BUTTON, &CAADlg::OnBnClickedAcalculateButton)
+	ON_BN_CLICKED(IDC_ACLEAR_BUTTON, &CAADlg::OnBnClickedAclearButton)
+	ON_BN_CLICKED(IDC_A2PEOPLE, &CAADlg::OnBnClickedA2people)
+	ON_BN_CLICKED(IDC_A3PEOPLE, &CAADlg::OnBnClickedA3people)
+	ON_BN_CLICKED(IDC_A4PEOPLE, &CAADlg::OnBnClickedA4people)
 END_MESSAGE_MAP()
 
 
@@ -68,4 +83,91 @@ void CAADlg::OnBnClickedAmenu4()
 	// TODO: 在此添加控件通知处理程序代码
 	CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
 	pMMD->ShowPage(3);			//跳到购物最优价对话框
+}
+
+
+void CAADlg::OnBnClickedAcalculateButton()		//计算按钮
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	double money1, money2, total_money;
+	total_money = m_aPrice1 + m_aPrice2;
+	if (total_money == 0.0f)	//两人购买总金额不能为零，否则提醒用户重新输入
+	{
+		MessageBox("请输入数据！");
+	}
+	else
+	{
+		money1 = m_aPrice1 * m_aPriceAll / total_money;
+		money2 = m_aPrice2 * m_aPriceAll / total_money;
+		m_astr.Format("用户1应支付%.2f\r\n用户2应支付%.2f", money1, money2);		//格式化输出结论
+	}
+	UpdateData(FALSE);
+}
+
+
+void CAADlg::OnBnClickedAclearButton()		//清零按钮
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_astr = "";
+	m_aPrice1 = 0;
+	m_aPrice2 = 0;
+	m_aPriceAll = 0;
+	UpdateData(FALSE);
+}
+
+
+void CAADlg::OnBnClickedA2people()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_a2people = 0;
+	UpdateData(FALSE);
+	SwitchPage();		//转换至对应界面
+}
+
+
+void CAADlg::OnBnClickedA3people()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_a2people = 1;
+	UpdateData(FALSE);
+	SwitchPage();		//转换至对应界面
+}
+
+
+void CAADlg::OnBnClickedA4people()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	m_a2people = 2;
+	UpdateData(FALSE);
+	SwitchPage();		//转换至对应界面
+}
+
+void CAADlg::SwitchPage()
+{
+	UpdateData(TRUE);
+	int temp = m_a2people;
+	m_a2people = 0;
+	UpdateData(FALSE);
+	if (temp == 0)
+	{
+		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
+		pMMD->ShowPage(2);
+	}
+	else if (temp == 1)
+	{
+		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
+		pMMD->ShowPage(7);
+	}
+	else if (temp == 2)
+	{
+		CBaseDlg* pMMD = (CBaseDlg*)AfxGetMainWnd();
+		pMMD->ShowPage(8);
+	}
+	else                              //错误情况
+		MessageBox("出现问题啦，请重新选择！");
 }

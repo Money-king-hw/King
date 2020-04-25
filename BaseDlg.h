@@ -11,6 +11,8 @@ class CShoppingDlg;
 class CBonus2Dlg;
 class CBonus3Dlg;
 class CBonus4Dlg;
+class CAA2Dlg;
+class CAA3Dlg;
 
 // CBaseDlg 对话框
 class CBaseDlg : public CDialogEx
@@ -31,7 +33,9 @@ public:
 		DLG_SHOPPING,
 		DLG_BONUS2,
 		DLG_BONUS3,
-		DLG_BONUS4
+		DLG_BONUS4,
+		DLG_AA2,
+		DLG_AA3
 	};
 
 	CMoneyKingDlg* m_MoneyKing;
@@ -41,6 +45,8 @@ public:
 	CBonus2Dlg* m_Bonus2;
 	CBonus3Dlg* m_Bonus3;
 	CBonus4Dlg* m_Bonus4;
+	CAA2Dlg* m_AA2;
+	CAA3Dlg* m_AA3;
 
 	void ShowPage(int CurrentPage);
 

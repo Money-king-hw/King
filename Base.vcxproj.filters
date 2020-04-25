@@ -54,6 +54,12 @@
     <ClInclude Include="Bonus4Dlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AA2Dlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AA3Dlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Base.cpp">
@@ -84,6 +90,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Bonus4Dlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AA2Dlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AA3Dlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
