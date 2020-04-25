@@ -170,16 +170,13 @@ void CBonus3Dlg::Calculator()
 	{
 		n_res = "A的性价比更高!";
 	}
+	else if (num_a == num_b)
+	{
+		n_res = "A和B的性价比相同!";
+	}
 	else
 	{
-		if (num_a == num_b)
-		{
-			n_res = "A和B的性价比相同!";
-		}
-		else
-		{
-			n_res = "B的性价比更高!";
-		}
+		n_res = "B的性价比更高!";
 	}
 	UpdateData(FALSE);
 }

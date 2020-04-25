@@ -171,20 +171,33 @@ void CBonus2Dlg::Calculator()
 	double num_b = n_3 / n_4; //规格B的平均价格
 	double num_c = n_5 / n_6; //规格C的平均价格
 
-	if ((num_a <= num_b) & (num_a <= num_c))
+	if (((num_a < num_b) & (num_b <= num_c)) || ((num_a < num_c) & (num_c <= num_b)))
 	{
 		n_res = "A的性价比最高!";
 	}
-	else
+	else if (((num_b < num_a) & (num_a <= num_c)) || ((num_b < num_c) & (num_c <= num_b)))
 	{
-		if ((num_b <= num_a) & (num_b <= num_c))
-		{
-			n_res = "B的性价比最高!";
-		}
-		else
-		{
-			n_res = "C的性价比最高!";
-		}
+		n_res = "B的性价比最高!";
+	}
+	else if (((num_c < num_a) & (num_a <= num_b)) || ((num_c < num_b) & (num_b <= num_a)))
+	{
+		n_res = "C的性价比最高!";
+	}
+	else if ((num_c == num_a) & (num_a < num_b))
+	{
+		n_res = "A和C的性价比都是最高的!";
+	}
+	else if ((num_b == num_a) & (num_a < num_c))
+	{
+		n_res = "A和B的性价比都是最高的!";
+	}
+	else if ((num_c == num_b) & (num_c < num_a))
+	{
+		n_res = "B和C的性价比都是最高的!";
+	}
+	else if (num_c == num_b == num_a)
+	{
+		n_res = "A、B、C的性价比相同!";
 	}
 	UpdateData(FALSE);
 }
