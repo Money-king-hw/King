@@ -231,6 +231,8 @@ void CBonus2Dlg::OnBnClickedButton2()
 	n_4 = 0;
 	n_5 = 0;
 	n_6 = 0;
+	GetDlgItem(IDC_EDIT4)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_EDIT4)->ShowWindow(SW_SHOW);
 	UpdateData(FALSE);
 }
 

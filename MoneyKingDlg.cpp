@@ -80,6 +80,8 @@ void CMoneyKingDlg::OnBnClickedClearButton()		//清零按钮
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
 	m_str = "";			//将显示框清空
+	GetDlgItem(IDC_EDIT1)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_EDIT1)->ShowWindow(SW_SHOW);
 	UpdateData(FALSE);
 }
 
@@ -388,3 +390,4 @@ HBRUSH CMoneyKingDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
 }
+

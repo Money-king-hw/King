@@ -116,6 +116,9 @@ void CAADlg::OnBnClickedAclearButton()		//清零按钮
 	m_aPrice1 = 0;
 	m_aPrice2 = 0;
 	m_aPriceAll = 0;
+	GetDlgItem(IDC_AEDIT)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_AEDIT)->ShowWindow(SW_SHOW);
+
 	UpdateData(FALSE);
 }
 

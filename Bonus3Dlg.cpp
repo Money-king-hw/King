@@ -208,6 +208,8 @@ void CBonus3Dlg::OnBnClickedButton2()
 	n_2 = 0;
 	n_3 = 0;
 	n_4 = 0;
+	GetDlgItem(IDC_EDIT5)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_EDIT5)->ShowWindow(SW_SHOW);
 	UpdateData(FALSE);
 }
 

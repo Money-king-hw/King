@@ -180,6 +180,9 @@ void CAA3Dlg::OnBnClickedA3clearButton()		//清零按钮
 	m_a3price3 = 0;
 	m_a3price4 = 0;
 	m_a3PriceAll = 0;
+	GetDlgItem(IDC_A3EDIT)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_A3EDIT)->ShowWindow(SW_SHOW);
+
 	UpdateData(FALSE);
 }
 

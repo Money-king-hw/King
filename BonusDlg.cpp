@@ -215,6 +215,8 @@ void CBonusDlg::OnBnClickedButton2()  //清零键
 	num_2 = 0;
 	num_3 = 0;
 	num_4 = 0;
+	GetDlgItem(IDC_EDIT5)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_EDIT5)->ShowWindow(SW_SHOW);
 	UpdateData(FALSE);
 }
 
@@ -261,4 +263,3 @@ HBRUSH CBonusDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
 }
-

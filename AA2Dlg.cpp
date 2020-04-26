@@ -175,6 +175,8 @@ void CAA2Dlg::OnBnClickedA2clearButton()		//清零按钮
 	m_a2price2 = 0;
 	m_a2price3 = 0;
 	m_a2PriceAll = 0;
+	GetDlgItem(IDC_A2EDIT)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_A2EDIT)->ShowWindow(SW_SHOW);
 	UpdateData(FALSE);
 }
 
@@ -221,3 +223,4 @@ HBRUSH CAA2Dlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
 }
+

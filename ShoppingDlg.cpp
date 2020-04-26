@@ -58,6 +58,7 @@ BEGIN_MESSAGE_MAP(CShoppingDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &CShoppingDlg::OnBnClickedButton1)
 	ON_WM_PAINT()
 	ON_WM_CTLCOLOR()
+	ON_BN_CLICKED(IDC_BUTTON2, &CShoppingDlg::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -203,4 +204,22 @@ HBRUSH CShoppingDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
+}
+
+
+void CShoppingDlg::OnBnClickedButton2()
+{
+	UpdateData(TRUE);
+	n_result = 0;       //将结论显示框清空
+	n_price = 0;
+	num_1 = 0;
+	num_2 = 0;
+	num_3 = 0;
+	num_4 = 0;
+	num_5 = 0;
+	num_6 = 0;
+	num_7 = 0;
+	GetDlgItem(IDC_EDIT3)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
+	UpdateData(FALSE);
 }
