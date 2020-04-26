@@ -36,4 +36,6 @@ public:
 	double num_7;
 	double n_price;
 	double n_result;
+	afx_msg void OnPaint();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

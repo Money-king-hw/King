@@ -39,4 +39,6 @@ public:
 	afx_msg void OnBnClickedA34people();
 	afx_msg void OnBnClickedA3calculateButton();
 	afx_msg void OnBnClickedA3clearButton();
+	afx_msg void OnPaint();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

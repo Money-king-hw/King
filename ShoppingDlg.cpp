@@ -56,6 +56,8 @@ BEGIN_MESSAGE_MAP(CShoppingDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_SMENU_3, &CShoppingDlg::OnBnClickedSmenu3)
 	ON_BN_CLICKED(IDC_SMENU_4, &CShoppingDlg::OnBnClickedSmenu4)
 	ON_BN_CLICKED(IDC_BUTTON1, &CShoppingDlg::OnBnClickedButton1)
+	ON_WM_PAINT()
+	ON_WM_CTLCOLOR()
 END_MESSAGE_MAP()
 
 
@@ -158,3 +160,47 @@ void CShoppingDlg::OnBnClickedButton1()
 
 }
 
+
+
+void CShoppingDlg::OnPaint()
+{
+	CPaintDC dc(this); // device context for painting
+					   // TODO: 在此处添加消息处理程序代码
+					   // 不为绘图消息调用 CDialogEx::OnPaint()
+	CDC* pDC = &dc;
+	CBitmap m_cBitmap;
+	BITMAP  m_sBITMAP;
+	BOOL m_isBmpLoaded = FALSE;
+	CRect m_rect;
+	if (!m_isBmpLoaded)
+	{
+		m_cBitmap.LoadBitmap(IDB_BITMAP1);
+		m_cBitmap.GetBitmap(&m_sBITMAP);
+		m_isBmpLoaded = TRUE;
+	}
+	GetClientRect(&m_rect);
+	//clear DC
+	pDC->Rectangle(0, 0, m_rect.right, m_rect.bottom);
+	CDC* pMemDC = new CDC;
+	pMemDC->CreateCompatibleDC(pDC);
+	pMemDC->SelectObject(&m_cBitmap);
+	pDC->BitBlt(0, 0, m_rect.right, m_rect.bottom, pMemDC, 0, 0, SRCCOPY);
+	delete pMemDC;
+}
+
+
+HBRUSH CShoppingDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
+	HBRUSH hbr = CDialogEx::OnCtlColor(pDC, pWnd, nCtlColor);
+
+	// TODO:  在此更改 DC 的任何特性
+
+	if (nCtlColor == CTLCOLOR_STATIC)  //静态文本
+	{
+		pDC->SetBkMode(TRANSPARENT);    //设置控件透明
+		return   (HBRUSH)::GetStockObject(NULL_BRUSH);
+	}
+
+	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
+	return hbr;
+}

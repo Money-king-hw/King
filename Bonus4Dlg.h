@@ -43,4 +43,6 @@ public:
 	CString n_res;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
+	afx_msg void OnPaint();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

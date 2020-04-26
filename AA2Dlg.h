@@ -38,4 +38,6 @@ public:
 	afx_msg void OnBnClickedA24people();
 	afx_msg void OnBnClickedA2calculateButton();
 	afx_msg void OnBnClickedA2clearButton();
+	afx_msg void OnPaint();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 };

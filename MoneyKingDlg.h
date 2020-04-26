@@ -59,4 +59,7 @@ public:
 	afx_msg void OnBnClickedMmenu2();
 	afx_msg void OnBnClickedMmenu3();
 	afx_msg void OnBnClickedMmenu4();
+	afx_msg void OnPaint();
+	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+//	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
 };

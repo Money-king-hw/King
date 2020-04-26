@@ -16,6 +16,7 @@
 #define IDD_BONUS4_DIALOG               142
 #define IDD_AA2_DIALOG                  144
 #define IDD_AA3_DIALOG                  146
+#define IDB_BITMAP1                     148
 #define IDC_EDIT1                       1003
 #define IDC_AMENU_1                     1004
 #define IDC_EDIT3                       1004
@@ -138,7 +139,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        148
+#define _APS_NEXT_RESOURCE_VALUE        149
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1111
 #define _APS_NEXT_SYMED_VALUE           101
