@@ -136,7 +136,9 @@ void CShoppingDlg::Calculator()
 	{
 		d = num_7;
 	}
-	n_result = n_price - a - b - c - d;
+	n_result = round((n_price - a - b - c - d)*100)/100;
+	GetDlgItem(IDC_EDIT3)->ShowWindow(SW_HIDE);
+	GetDlgItem(IDC_EDIT3)->ShowWindow(SW_SHOW);
 
 	UpdateData(FALSE);
 }

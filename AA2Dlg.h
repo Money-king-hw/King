@@ -29,6 +29,7 @@ public:
 	double m_a2price3;
 	double m_a2PriceAll;
 	CString m_a2str;
+	int old;
 	afx_msg void OnBnClickedA2menu1();
 	afx_msg void OnBnClickedA2menu2();
 	afx_msg void OnBnClickedA2menu3();
@@ -40,4 +41,6 @@ public:
 	afx_msg void OnBnClickedA2clearButton();
 	afx_msg void OnPaint();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
+	virtual BOOL OnInitDialog();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };

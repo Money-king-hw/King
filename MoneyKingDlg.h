@@ -20,7 +20,7 @@ public:
 	double m_fNumber1;
 	double m_fNumber2;
 
-	//保存计算符号,0='+',1='-',2='*',3='/'
+	//保存计算符号,0='+',1='-',2='*',3='/',4='^',5='mod'
 	int m_iSign;
 
 	//计算
@@ -61,5 +61,11 @@ public:
 	afx_msg void OnBnClickedMmenu4();
 	afx_msg void OnPaint();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
-//	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
+	virtual BOOL OnInitDialog();
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedExp();
+	afx_msg void OnBnClickedExp2();
+	afx_msg void OnBnClickedLn();
+	afx_msg void OnBnClickedMod();
+	afx_msg void OnBnClickedSqrt();
 };

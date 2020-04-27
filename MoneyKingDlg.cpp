@@ -6,6 +6,9 @@
 #include "MoneyKingDlg.h"
 #include "afxdialogex.h"
 #include "BaseDlg.h"
+#include <ctime>
+#include <cstdlib>
+#include <cmath>
 
 
 // CMoneyKingDlg 对话框
@@ -57,6 +60,12 @@ BEGIN_MESSAGE_MAP(CMoneyKingDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_MMENU_4, &CMoneyKingDlg::OnBnClickedMmenu4)
 	ON_WM_PAINT()
 	ON_WM_CTLCOLOR()
+	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_EXP, &CMoneyKingDlg::OnBnClickedExp)
+	ON_BN_CLICKED(IDC_EXP2, &CMoneyKingDlg::OnBnClickedExp2)
+	ON_BN_CLICKED(IDC_LN, &CMoneyKingDlg::OnBnClickedLn)
+	ON_BN_CLICKED(IDC_MOD, &CMoneyKingDlg::OnBnClickedMod)
+	ON_BN_CLICKED(IDC_SQRT, &CMoneyKingDlg::OnBnClickedSqrt)
 END_MESSAGE_MAP()
 
 
@@ -71,6 +80,12 @@ void CMoneyKingDlg::OnBnClickedBackButton()			//后退按钮
 	{
 		m_str = m_str.Left(m_str.GetLength() - 1);		//移除最右边一个字符
 	}
+	if (m_str.GetLength() != m_istrle)		//如果最后一个字符为运算符，则清空运算符数据
+	{
+		m_iSign = -1;
+		m_istrle = 0;
+	}
+	
 	UpdateData(FALSE);
 }
 
@@ -80,6 +95,8 @@ void CMoneyKingDlg::OnBnClickedClearButton()		//清零按钮
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
 	m_str = "";			//将显示框清空
+	m_istrle = 0;
+	m_iSign = -1;
 	GetDlgItem(IDC_EDIT1)->ShowWindow(SW_HIDE);
 	GetDlgItem(IDC_EDIT1)->ShowWindow(SW_SHOW);
 	UpdateData(FALSE);
@@ -90,16 +107,22 @@ void CMoneyKingDlg::OnBnClickedPercent()		//百分比按钮
 {
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
-	double temp;
-	temp = atof(m_str);
-	temp = temp / 100;
-	if (temp - int(temp) <= 1e-5)
+	if (m_str.GetLength() != m_istrle)
 	{
-		m_str.Format("%d", (int)temp);
-	}
-	else
-	{
-		m_str.Format("%g", temp);  //double型的数据转为Cstring型,并去除多余的零
+		CString strtemp;
+		double temp;
+		strtemp = m_str.Right(m_str.GetLength() - m_istrle);		//获得第二个操作数
+		temp = atof(strtemp);
+		temp = temp / 100;
+		if (temp - int(temp) <= 1e-5)
+		{
+			strtemp.Format("%d", (int)temp);
+		}
+		else
+		{
+			strtemp.Format("%g", temp);  //double型的数据转为Cstring型,并去除多余的零
+		}
+		m_str = m_str.Left(m_istrle) + strtemp;
 	}
 	UpdateData(FALSE);
 }
@@ -108,48 +131,248 @@ void CMoneyKingDlg::OnBnClickedPercent()		//百分比按钮
 void CMoneyKingDlg::OnBnClickedAdd()		//加号按钮
 {
 	// TODO: 在此添加控件通知处理程序代码
-	SaveValue1();		//保存第一个数值并在按下操作符按钮后、第二个数值输出之前使编辑框空白
-	UpdateData(TRUE);
-	m_str = m_str + "+";
-	UpdateData(FALSE);
-	m_istrle = strlen(m_str);    //求目前字符串的长度
-	m_iSign = 0;		//加号标志，用于Calculator()函数中case的跳转判断
+	if (m_str.GetLength() != 0)		//当存在操作数时进行运算
+	{
+		if (m_str.GetLength() != m_istrle)		//最后一个符号不为运算符
+		{
+			if (m_iSign == 0 || m_iSign == 1 || m_iSign == 2 || m_iSign == 3 || m_iSign == 4 || m_iSign == 5)
+				Calculator();		//如果此前已有计算符号，则计算出先前运算的答案
+			SaveValue1();		//保存第一个数值
+		}
+		else			//如果最后一个符号为运算符，则替换运算符
+		{
+			UpdateData(TRUE);
+			m_str = m_str.Left(m_str.GetLength() - 1);
+			UpdateData(FALSE);
+		}
+		UpdateData(TRUE);
+		m_str = m_str + "+";
+		UpdateData(FALSE);
+		m_istrle = strlen(m_str);    //求目前字符串的长度
+		m_iSign = 0;		//加号标志，用于Calculator()函数中case的跳转判断
+	}
 }
 
 
 void CMoneyKingDlg::OnBnClickedDec()		//减号按钮
 {
 	// TODO: 在此添加控件通知处理程序代码
-	SaveValue1();
-	UpdateData(TRUE);
-	m_str = m_str + "-";
-	UpdateData(FALSE);
-	m_istrle = strlen(m_str);    //求目前字符串的长度
-	m_iSign = 1;		//减号标志，用于Calculator()函数中case的跳转判断
+	if (m_str.GetLength() != 0)		//当存在操作数时进行运算
+	{
+		if (m_str.GetLength() != m_istrle)		//最后一个符号不为运算符
+		{
+			if (m_iSign == 0 || m_iSign == 1 || m_iSign == 2 || m_iSign == 3 || m_iSign == 4 || m_iSign == 5)
+				Calculator();		//如果此前已有计算符号，则计算出先前运算的答案
+			SaveValue1();		//保存第一个数值
+		}
+		else			//如果最后一个符号为运算符，则替换运算符
+		{
+			UpdateData(TRUE);
+			m_str = m_str.Left(m_str.GetLength() - 1);
+			UpdateData(FALSE);
+		}
+		UpdateData(TRUE);
+		m_str = m_str + "-";
+		UpdateData(FALSE);
+		m_istrle = strlen(m_str);    //求目前字符串的长度
+		m_iSign = 1;		//减号标志，用于Calculator()函数中case的跳转判断
+	}
 }
 
 
 void CMoneyKingDlg::OnBnClickedMultiply()		//乘号按钮
 {
 	// TODO: 在此添加控件通知处理程序代码
-	SaveValue1();
-	UpdateData(TRUE);
-	m_str = m_str + "*";
-	UpdateData(FALSE);
-	m_istrle = strlen(m_str);    //求目前字符串的长度
-	m_iSign = 2;		//乘号标志，用于Calculator()函数中case的跳转判断
+	if (m_str.GetLength() != 0)		//当存在操作数时进行运算
+	{
+		if (m_str.GetLength() != m_istrle)		//最后一个符号不为运算符
+		{
+			if (m_iSign == 0 || m_iSign == 1 || m_iSign == 2 || m_iSign == 3 || m_iSign == 4 || m_iSign == 5)
+				Calculator();		//如果此前已有计算符号，则计算出先前运算的答案
+			SaveValue1();		//保存第一个数值
+		}
+		else			//如果最后一个符号为运算符，则替换运算符
+		{
+			UpdateData(TRUE);
+			m_str = m_str.Left(m_str.GetLength() - 1);
+			UpdateData(FALSE);
+		}
+		UpdateData(TRUE);
+		m_str = m_str + "*";
+		UpdateData(FALSE);
+		m_istrle = strlen(m_str);    //求目前字符串的长度
+		m_iSign = 2;		//乘号标志，用于Calculator()函数中case的跳转判断
+	}
 }
 
 
 void CMoneyKingDlg::OnBnClickedDivide()			//除号按钮
 {
 	// TODO: 在此添加控件通知处理程序代码
-	SaveValue1();
+	if (m_str.GetLength() != 0)		//当存在操作数时进行运算
+	{
+		if (m_str.GetLength() != m_istrle)		//最后一个符号不为运算符
+		{
+			if (m_iSign == 0 || m_iSign == 1 || m_iSign == 2 || m_iSign == 3 || m_iSign == 4 || m_iSign == 5)
+				Calculator();		//如果此前已有计算符号，则计算出先前运算的答案
+			SaveValue1();		//保存第一个数值
+		}
+		else			//如果最后一个符号为运算符，则替换运算符
+		{
+			UpdateData(TRUE);
+			m_str = m_str.Left(m_str.GetLength() - 1);
+			UpdateData(FALSE);
+		}
+		UpdateData(TRUE);
+		m_str = m_str + "/";
+		UpdateData(FALSE);
+		m_istrle = strlen(m_str);    //求目前字符串的长度
+		m_iSign = 3;		//除号标志，用于Calculator()函数中case的跳转判断
+	}
+}
+
+void CMoneyKingDlg::OnBnClickedExp()		//幂次按钮
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if (m_str.GetLength() != 0)		//当存在操作数时进行运算
+	{
+		if (m_str.GetLength() != m_istrle)		//最后一个符号不为运算符
+		{
+			if (m_iSign == 0 || m_iSign == 1 || m_iSign == 2 || m_iSign == 3 || m_iSign == 4 || m_iSign == 5)
+				Calculator();		//如果此前已有计算符号，则计算出先前运算的答案
+			SaveValue1();		//保存第一个数值
+		}
+		else			//如果最后一个符号为运算符，则替换运算符
+		{
+			UpdateData(TRUE);
+			m_str = m_str.Left(m_str.GetLength() - 1);
+			UpdateData(FALSE);
+		}
+		UpdateData(TRUE);
+		m_str = m_str + "^";
+		UpdateData(FALSE);
+		m_istrle = strlen(m_str);    //求目前字符串的长度
+		m_iSign = 4;		//幂次标志，用于Calculator()函数中case的跳转判断
+	}
+}
+
+
+void CMoneyKingDlg::OnBnClickedMod()		//取余按钮
+{
+	// TODO: 在此添加控件通知处理程序代码
+	if (m_str.GetLength() != 0)		//当存在操作数时进行运算
+	{
+		if (m_str.GetLength() != m_istrle)		//最后一个符号不为运算符
+		{
+			if (m_iSign == 0 || m_iSign == 1 || m_iSign == 2 || m_iSign == 3 || m_iSign == 4 || m_iSign == 5)
+				Calculator();		//如果此前已有计算符号，则计算出先前运算的答案
+			SaveValue1();		//保存第一个数值
+		}
+		else			//如果最后一个符号为运算符，则替换运算符
+		{
+			UpdateData(TRUE);
+			m_str = m_str.Left(m_str.GetLength() - 1);
+			UpdateData(FALSE);
+		}
+		UpdateData(TRUE);
+		m_str = m_str + "%";
+		UpdateData(FALSE);
+		m_istrle = strlen(m_str);    //求目前字符串的长度
+		m_iSign = 5;		//取余标志，用于Calculator()函数中case的跳转判断
+	}
+}
+
+
+void CMoneyKingDlg::OnBnClickedExp2()		//平方按钮
+{
+	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
-	m_str = m_str + "/";
+	if (m_str.GetLength() != m_istrle)
+	{
+		CString strtemp;
+		double temp;
+		strtemp = m_str.Right(m_str.GetLength() - m_istrle);		//获得第二个操作数
+		temp = atof(strtemp);
+		temp = temp * temp;		//平方运算
+		if (temp - int(temp) <= 1e-5)
+		{
+			strtemp.Format("%d", (int)temp);
+		}
+		else
+		{
+			strtemp.Format("%g", temp);  //double型的数据转为Cstring型,并去除多余的零
+		}
+		m_str = m_str.Left(m_istrle) + strtemp;
+	}
 	UpdateData(FALSE);
-	m_istrle = strlen(m_str);    //求目前字符串的长度
-	m_iSign = 3;		//除号标志，用于Calculator()函数中case的跳转判断
+}
+
+
+void CMoneyKingDlg::OnBnClickedSqrt()		//平方根按钮
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	if (m_str.GetLength() != m_istrle)
+	{
+		CString strtemp;
+		double temp;
+		strtemp = m_str.Right(m_str.GetLength() - m_istrle);		//获得第二个操作数
+		temp = atof(strtemp);
+		if (temp >= 0)		//正数开根，负数弹出提示
+		{
+			temp = sqrt(temp);		//开平方根
+			if (temp - int(temp) <= 1e-5)
+			{
+				strtemp.Format("%d", (int)temp);
+			}
+			else
+			{
+				strtemp.Format("%g", temp);  //double型的数据转为Cstring型,并去除多余的零
+			}
+			m_str = m_str.Left(m_istrle) + strtemp;
+		}
+		else
+		{
+			MessageBox("负数不能开平方根！");
+		}
+	}
+	UpdateData(FALSE);
+}
+
+
+void CMoneyKingDlg::OnBnClickedLn()			//自然对数按钮
+{
+	// TODO: 在此添加控件通知处理程序代码
+	UpdateData(TRUE);
+	if (m_str.GetLength() != m_istrle)
+	{
+		CString strtemp;
+		double temp;
+		strtemp = m_str.Right(m_str.GetLength() - m_istrle);		//获得第二个操作数
+		temp = atof(strtemp);
+		if (temp > 0)		//正数取对数，非正数弹出提示
+		{
+			temp = log(temp);
+			if (temp - int(temp) <= 1e-5)
+			{
+				strtemp.Format("%d", (int)temp);
+			}
+			else
+			{
+				strtemp.Format("%g", temp);  //double型的数据转为Cstring型,并去除多余的零
+			}
+			m_str = m_str.Left(m_istrle) + strtemp;
+		}
+		else if (temp == 0)
+		{
+			MessageBox("零不能取自然对数！");
+		}
+		else
+		{
+			MessageBox("负数不能取自然对数！");
+		}
+	}
+	UpdateData(FALSE);
 }
 
 
@@ -244,7 +467,7 @@ void CMoneyKingDlg::OnBnClickedEqual()		//等号按钮，当按下该按钮时�
 {
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
-	if (m_iSign != 0 && m_iSign != 1 && m_iSign != 2 && m_iSign != 3)
+	if (m_iSign != 0 && m_iSign != 1 && m_iSign != 2 && m_iSign != 3 && m_iSign != 4 && m_iSign != 5)
 	{
 		m_fNumber1 = atof(m_str);		//当单击输入某一个数值而没有单击操作符按钮、直接单击“=”时，界面上保持显示第一个操作数
 	}
@@ -257,9 +480,14 @@ void CMoneyKingDlg::OnBnClickedDemical()		//小数点按钮
 {
 	// TODO: 在此添加控件通知处理程序代码
 	UpdateData(TRUE);
-	if (-1 == m_str.Find('.'))
+	if (m_str.GetLength() != m_istrle)
 	{
-		m_str = m_str + ".";		//如果没有小数点，则加上一个小数点，如果已有小数点就忽略此次的小数点，保证最多只有1个
+		CString strtemp;
+		strtemp = m_str.Right(m_str.GetLength() - m_istrle);		//获得第二个操作数
+		if (-1 == strtemp.Find('.'))
+		{
+			m_str = m_str + ".";		//如果没有小数点，则加上一个小数点，如果已有小数点就忽略此次的小数点，保证最多只有1个
+		}
 	}
 	UpdateData(FALSE);
 }
@@ -298,6 +526,11 @@ void CMoneyKingDlg::Calculator()	//计算，涉及到两个操作数，按下“
 			f = m_fNumber1 / m_fNumber2;//除
 		}
 		break;
+	case 4:
+		f = pow(m_fNumber1, m_fNumber2);//幂次
+		break;
+	case 5:
+		f = fmod(m_fNumber1, m_fNumber2);//取余
 	default:
 		break;
 	}
@@ -311,6 +544,9 @@ void CMoneyKingDlg::Calculator()	//计算，涉及到两个操作数，按下“
 	{
 		m_str.Format("%g", f);  //double型的数据转为Cstring型，并去除多余的零
 	}
+	m_iSign = -1;		//清空计算符号
+	m_istrle = 0;
+
 	UpdateData(FALSE);
 }
 
@@ -391,3 +627,103 @@ HBRUSH CMoneyKingDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 	return hbr;
 }
 
+
+
+BOOL CMoneyKingDlg::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	// TODO:  在此添加额外的初始化
+	SetTimer(1, 50, NULL);
+
+	srand((int)time(0));
+
+	int i = rand() % 12;
+
+	CString headstr = "每次多攒一点点，快乐生活每一天！\r\n今天的省钱小妙招是：\r\n\r\n";
+
+	switch (i)
+	{
+	case 0:
+	{
+		MessageBox(headstr + "超市里同一款商品，最难拿到的生产日期越好", "省钱小妙招");
+	}
+	break;
+	case 1:
+	{
+		MessageBox(headstr + "同一家商店在不同外卖平台的满减不一定相同", "省钱小妙招");
+	}
+	break;
+	case 2:
+	{
+		MessageBox(headstr + "自用的商品少买礼盒装，普通包装更划算", "省钱小妙招");
+	}
+	break;
+	case 3:
+	{
+		MessageBox(headstr + "饿了么外卖上的店铺满减、津贴、饭票和红包是可以同时使用的哦", "省钱小妙招");
+	}
+	break;
+	case 4:
+	{
+		MessageBox(headstr + "晚上八点之后，超市的鲜食价格超低", "省钱小妙招");
+	}
+	break;
+	case 5:
+	{
+		MessageBox(headstr + "揣着学生证，吃喝玩乐都能省", "省钱小妙招");
+	}
+	break;
+	case 6:
+	{
+		MessageBox(headstr + "电影上映前两周，购票平台会有9.9的点映价", "省钱小妙招");
+	}
+	break;
+	case 7:
+	{
+		MessageBox(headstr + "到店用餐可以提前看看网上有没有团购套餐，会更划算哦", "省钱小妙招");
+	}
+	break;
+	case 8:
+	{
+		MessageBox(headstr + "海底捞两个半份的量比一份多，价钱却一样哦", "省钱小妙招");
+	}
+	break;
+	case 9:
+	{
+		MessageBox(headstr + "保健品维生素比药品维生素含量低，价格贵，都是智商税", "省钱小妙招");
+	}
+	break;
+	case 10:
+	{
+		MessageBox(headstr + "无硅油的洗发水除了贵点，没其他用处", "省钱小妙招");
+	}
+	break;
+	case 11:
+	{
+		MessageBox(headstr + "牙膏含氟就行，其他再贵再花里胡哨的功能都没多大用", "省钱小妙招");
+	}
+	break;
+	}
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // 异常: OCX 属性页应返回 FALSE
+}
+
+
+void CMoneyKingDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+
+	switch (nIDEvent)
+	{
+	case 1:
+	{
+		GetDlgItem(IDC_EDIT1)->ShowWindow(SW_HIDE);
+		GetDlgItem(IDC_EDIT1)->ShowWindow(SW_SHOW);
+		break;
+	}
+	}
+
+	CDialogEx::OnTimer(nIDEvent);
+}

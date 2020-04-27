@@ -54,6 +54,7 @@ BEGIN_MESSAGE_MAP(CAA3Dlg, CDialogEx)
 	ON_BN_CLICKED(IDC_A3CLEAR_BUTTON, &CAA3Dlg::OnBnClickedA3clearButton)
 	ON_WM_PAINT()
 	ON_WM_CTLCOLOR()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
@@ -228,4 +229,40 @@ HBRUSH CAA3Dlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
 
 	// TODO:  如果默认的不是所需画笔，则返回另一个画笔
 	return hbr;
+}
+
+
+BOOL CAA3Dlg::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	// TODO:  在此添加额外的初始化
+	SetTimer(1, 100, NULL);
+	old = GetDlgItem(IDC_A3EDIT)->GetScrollPos(SB_VERT);		//获取滑轮位置
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // 异常: OCX 属性页应返回 FALSE
+}
+
+
+void CAA3Dlg::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+
+	switch (nIDEvent)
+	{
+	case 1:
+	{
+		int n = GetDlgItem(IDC_A3EDIT)->GetScrollPos(SB_VERT);	//获取滑轮位置
+		if (n != old)		//old是先前滑轮的位置，如果新的滑轮位置不相同，再刷新，相同就不刷新
+		{
+			old = n;
+			GetDlgItem(IDC_A3EDIT)->ShowWindow(SW_HIDE);
+			GetDlgItem(IDC_A3EDIT)->ShowWindow(SW_SHOW);
+		}
+		break;
+	}
+	}
+
+	CDialogEx::OnTimer(nIDEvent);
 }

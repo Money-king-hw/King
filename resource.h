@@ -31,6 +31,8 @@
 #define IDC_ADD                         1009
 #define IDC_EDIT14                      1009
 #define IDC_AMENU_3                     1010
+#define IDC_EXP                         1010
+#define IDC_EXP2                        1011
 #define IDC_EDIT6                       1012
 #define IDC_MMENU_3                     1013
 #define IDC_EDIT7                       1013
@@ -57,8 +59,12 @@
 #define IDC_EQUAL                       1029
 #define IDC_MMENU_1                     1030
 #define IDC_BMENU_1                     1031
+#define IDC_LN                          1031
 #define IDC_BMENU_2                     1032
+#define IDC_MOD                         1032
 #define IDC_BMENU_3                     1033
+#define IDC_EXP3                        1033
+#define IDC_SQRT                        1033
 #define IDC_BUTTON1                     1035
 #define IDC_BUTTON2                     1036
 #define IDC_SMENU_1                     1038
